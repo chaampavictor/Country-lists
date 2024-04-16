@@ -1,0 +1,18 @@
+<mat-card class="custom-card mat-elevation-z4" [routerLink]="['/country-details', country.cca2]">
+  <div class="image-container">
+    <img mat-card-image [src]="country.flag" alt="Flag" class="header-image">
+  </div>
+
+  <mat-card-content class="content">
+    <p class="title">{{ country.name.common }}</p>
+    <p class="card-text">Capital: {{ country.capital }}</p>
+    <p class="card-text">Population: {{ country.population }}</p>
+    <p class="card-text">Currency: {{ getCurrencyName() }} ({{ getCurrencySymbol() }})</p>
+    <p class="card-text">Region: {{ country.region }}</p>
+  </mat-card-content>
+
+  <mat-card-actions class="action-buttons">
+    <app-button [label]="'Edit'" class="edit-button" *ngIf="isAdmin">Edit</app-button>
+    <app-button [label]="'Details'">View Details</app-button>
+  </mat-card-actions>
+</mat-card>

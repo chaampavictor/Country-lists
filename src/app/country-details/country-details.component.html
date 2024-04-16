@@ -1,0 +1,101 @@
+<div *ngIf="isLoading" class="loading-container">
+    <div class="loading-container">
+        <mat-spinner diameter="150"></mat-spinner>
+        <p>Loading...</p>
+    </div>
+</div>
+<div *ngIf="!isLoading && country">
+
+    <div class="container">
+        <div class="alert" *ngIf="isLoading">Loading country...</div>
+        <div class="country-container" *ngIf="country">
+            <img [src]="country?.flags?.svg" [alt]="country.flags.alt" />
+            <div>
+                <h2>{{ country.name.common }}</h2>
+                <ul class="country-data">
+                    <div>
+                        <div>
+                            <mat-icon class="icon">place</mat-icon>
+                            <span class="country-data-title">Continents: </span>
+                            <span>{{ country?.continents }}</span>
+                        </div>
+                        <div>
+                            <mat-icon class="icon">people</mat-icon>
+                            <span class="country-data-title">Population: </span>{{ country?.population }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">location_on</mat-icon>
+                            <span class="country-data-title">Region: </span>{{ country.region }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">location_searching</mat-icon>
+                            <span class="country-data-title">Sub Region: </span>{{country?.subregion}}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">location_city</mat-icon>
+                            <span class="country-data-title">Capital: </span>{{ country?.capital[0] }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">location_city</mat-icon>
+                            <span class="country-data-title">Independent: </span>{{ country?.independent ? 'Yes' : 'No'
+                            }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">directions_car</mat-icon>
+                            <span class="country-data-title">Driving Side: </span>{{ country?.car.side }}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <mat-icon class="icon">language</mat-icon>
+                            <span class="country-data-title">Top Level Domain: </span>{{country?.tld}}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">attach_money</mat-icon>
+                            <span class="country-data-title">Currencies: </span>{{ getCurrencyName(country) }} ({{
+                            getCurrencySymbol(country) }})
+                        </div>
+                        <div>
+                            <mat-icon class="icon">calendar_today</mat-icon>
+                            <span class="country-data-title">Start of Week: </span>{{ country?.startOfWeek }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">map</mat-icon>
+                            <span class="country-data-title">Area: </span>{{ country?.area }} km<sup>2</sup>
+                        </div>
+                        <div>
+                            <mat-icon class="icon">map</mat-icon>
+                            <span class="country-data-title">Landlocked?: </span>{{ country?.landlocked ? 'Yes' : 'No'
+                            }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">people</mat-icon>
+                            <span class="country-data-title">Demonyms?: </span>{{ country?.demonyms.eng.f }}
+                        </div>
+                        <div>
+                            <mat-icon class="icon">access_time</mat-icon>
+                            <span class="country-data-title">TimeZone?: </span>{{ country?.timezones[0] }}
+                        </div>
+                    </div>
+                </ul>
+                <div class="border-row">
+                    <h3><mat-icon class="icon">language</mat-icon> Languages:</h3>
+                    <div class="border-countries">
+                        <span *ngFor="let language of country.languages | keyvalue; last as isLast">{{ language.value
+                            }}</span>
+                    </div>
+                </div>
+                <div class="border-row">
+                    <h3><mat-icon class="icon">terrain</mat-icon> Bordering Countries:</h3>
+                    <div class="border-countries">
+                        <div *ngFor="let borderCountry of borderingCountries" class="border-item">{{ borderCountry }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <app-button [label]="'Go Back'" (click)="goBack()"></app-button>
+
+        </div>
+    </div>
+</div>

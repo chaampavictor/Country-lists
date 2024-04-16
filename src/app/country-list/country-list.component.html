@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+
+<div class="search-bar">
+  <input type="text" placeholder="Search Country" class="custom-height-input" [(ngModel)]="searchTerm" />
+    <app-button [label]="'Search'" (click)="searchCountries()"></app-button>
+
+  <div class="button-container">
+    <app-button [label]="'Reset'" (click)="resetSearch()"></app-button>
+  </div>
+</div>
+<p *ngIf="noCountryFound && searchTerm.trim() !== ''">No country found.</p>
+<div *ngIf="isLoading && !noCountryFound">
+  Loading...
+</div>
+
+<div class="grid-container">
+  <div class="grid-item" *ngFor="let country of countries">
+    <app-country-card [country]="country"></app-country-card>
+  </div>
+</div>
